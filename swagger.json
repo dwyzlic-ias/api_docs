@@ -1,0 +1,297 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "Public API for the Publica LLC platform.",
+    "title": "Publica Public API - Deals",
+    "contact": {
+      "name": "Dimitri Wyzlic",
+      "email": "dwyzlic@getpublica.com"
+    },
+    "version": "1.0"
+  },
+  "servers": [{
+    "url": "https://api.getpublica.com/v1/public"
+  }
+  ],
+  "paths": {
+    "/deal": {
+      "description": "Those route will manage linked deals. Publica deals can be linked to deals on your side. We will use the publisherID (taken from your authorization token) and deal_key (coming from url or body) to retrieve the publica deal matching your internal deal",
+      "get": {
+        "security": [
+          {
+            "PublicApiKey": []
+          }
+        ],
+        "description": "Get the publica deal linked to your own deal.",
+        "tags": [
+          "Deal"
+        ],
+        "summary": "Get a deal",
+        "parameters": [
+          {
+            "description": "Deal ID/Key (coming from your side)",
+            "name": "deal_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Deal"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "security": [
+          {
+            "PublicApiKey": []
+          }
+        ],
+        "description": "Create a publica deal linked to your own deal.",
+        "tags": [
+          "Deal"
+        ],
+        "summary": "Create a deal",
+        "parameters": [
+        ],
+        "requestBody": {
+          "description": "The deal object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Deal"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Deal"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "security": [
+          {
+            "PublicApiKey": []
+          }
+        ],
+        "description": "Update the publica deal linked to your own deal.",
+        "tags": [
+          "Deal"
+        ],
+        "summary": "Update a deal",
+        "parameters": [
+        ],
+        "requestBody": {
+          "description": "The deal object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Deal"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "PublicApiKey": []
+          }
+        ],
+        "description": "Delete the publica deal linked to your own deal.",
+        "tags": [
+          "Deal"
+        ],
+        "summary": "Delete a deal",
+        "parameters": [
+          {
+            "description": "Deal ID/Key (coming from your side)",
+            "name": "deal_id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Success": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "string",
+            "example": "successfully deleted object!"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "example": "bad format for start_date"
+          }
+        }
+      },
+      "Deal": {
+        "type": "object",
+        "properties": {
+          "deal_id": {
+            "description": "ID of the deal. This ID comes from your backend.",
+            "type": "string",
+            "example": "deal_456"
+          },
+          "deal_type": {
+            "description": "Type of the deal. (0 = open auction | 1 = private auction | 2 = programmatic guaranteed | 3 = preferred deal)",
+            "type": "integer",
+            "enum": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "example": 1,
+            "default": 0
+          },
+          "start_date": {
+            "description": "Must be in RFC 3339 format! Example: 2020-11-30T14:20:28.000+07:00",
+            "type": "string",
+            "example": "2020-11-30T14:20:28.000+07:00"
+          },
+          "end_date": {
+            "description": "Must be in RFC 3339 format! Example: 2020-11-30T14:20:28.000+07:00",
+            "type": "string",
+            "example": "2020-11-30T14:20:28.000+07:00"
+          },
+          "impression_goal": {
+            "type": "integer"
+          },
+          "bid_floor": {
+            "description": "Can be a float",
+            "type": "number"
+          },
+          "targeted_channels": {
+            "type": "array",
+            "items": {
+              "description": "the ID of a publica channel",
+              "type": "integer"
+            }
+          },
+          "targeted_channels_groups": {
+            "type": "array",
+            "items": {
+              "description": "the ID of a publica channel group",
+              "type": "integer"
+            }
+          },
+          "custom_params": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Deal_SamsungCustom"
+              }
+            ]
+          }
+        }
+      },
+      "Deal_SamsungCustom": {
+
+      }
+    },
+    "securitySchemes": {
+      "PublicApiKey": {
+        "type": "apiKey",
+        "in": "query",
+        "name": "token"
+      }
+    }
+  }
+}
