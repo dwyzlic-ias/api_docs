@@ -283,7 +283,33 @@
         }
       },
       "Deal_SamsungCustom": {
-
+        "type": "object",
+        "properties": {
+          "ecpm": {
+            "type": "number"
+          },
+          "partnerName": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "example": "PAUSED",
+            "enum": [
+              "PAUSED",
+              "STOPPED",
+              "PENDING",
+              "RUNNING",
+              "DELETED"
+            ]
+          },
+          "totalAdvBudget": {
+            "type": "number"
+          },
+          "isDealStopped": {
+            "description": "if deal stopped in Samsung's API",
+            "type": "boolean"
+          }
+        }
       }
     },
     "securitySchemes": {
