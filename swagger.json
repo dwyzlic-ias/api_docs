@@ -35,7 +35,7 @@
           {
             "description": "Deal ID/Key (coming from your side)",
             "name": "deal_id",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string"
@@ -174,7 +174,7 @@
           {
             "description": "Deal ID/Key (coming from your side)",
             "name": "deal_id",
-            "in": "query",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string"
