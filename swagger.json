@@ -10,7 +10,11 @@
     "version": "1.0"
   },
   "servers": [{
+    "description": "Production",
     "url": "https://api.getpublica.com/v1/public"
+  },{
+    "description": "Staging 19",
+    "url": "https://z019-api.stg-publica-ctv.com/v1/public"
   }
   ],
   "paths": {
