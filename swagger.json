@@ -18,7 +18,7 @@
   }
   ],
   "paths": {
-    "/deal": {
+    "/deal/{deal_id}": {
       "description": "Those route will manage linked deals. Publica deals can be linked to deals on your side. We will use the publisherID (taken from your authorization token) and deal_key (coming from url or body) to retrieve the publica deal matching your internal deal",
       "get": {
         "security": [
@@ -65,6 +65,53 @@
           }
         }
       },
+      "delete": {
+        "security": [
+          {
+            "PublicApiKey": []
+          }
+        ],
+        "description": "Delete the publica deal linked to your own deal.",
+        "tags": [
+          "Deal"
+        ],
+        "summary": "Delete a deal",
+        "parameters": [
+          {
+            "description": "Deal ID/Key (coming from your side)",
+            "name": "deal_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/deal": {
       "post": {
         "security": [
           {
@@ -136,51 +183,6 @@
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Success"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "security": [
-          {
-            "PublicApiKey": []
-          }
-        ],
-        "description": "Delete the publica deal linked to your own deal.",
-        "tags": [
-          "Deal"
-        ],
-        "summary": "Delete a deal",
-        "parameters": [
-          {
-            "description": "Deal ID/Key (coming from your side)",
-            "name": "deal_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
