@@ -258,6 +258,10 @@
             "type": "string",
             "example": "2020-11-30T14:20:28.000+07:00"
           },
+          "partner": {
+            "type": "string",
+            "example": "samsungssp"
+          },
           "impression_goal": {
             "type": "integer"
           },
@@ -272,7 +276,7 @@
               "type": "integer"
             }
           },
-          "targeted_channels_groups": {
+          "targeted_channel_groups": {
             "type": "array",
             "items": {
               "description": "the ID of a publica channel group",
